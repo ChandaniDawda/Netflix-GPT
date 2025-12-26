@@ -2,6 +2,11 @@
 
 -Create React app
 -Configured Tailwind CSS
+<<<<<<< HEAD
+=======
+-Header
+  - Login Form
+>>>>>>> b47d8f2 (Build Netflix GPT homepage with authentication UI)
 
 # Features
 
@@ -19,5 +24,8 @@
  -  NetflixGPT
    -  Search Bar
    -  Movie Suggestions   
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b47d8f2 (Build Netflix GPT homepage with authentication UI)

@@ -2,11 +2,20 @@
 
 -Create React app
 -Configured Tailwind CSS
-<<<<<<< HEAD
-=======
 -Header
-  - Login Form
->>>>>>> b47d8f2 (Build Netflix GPT homepage with authentication UI)
+  - Signin Form
+  - Signup Form
+-Routing of app
+-Form Validation
+-useRef Hook
+-firebase setup
+-deploying app to production
+-Create SignUp User Account
+-implement signin user API
+-created our redux store with userSlice
+-Implemented Sign Out
+-Update Profile
+  
 
 # Features
 
@@ -24,8 +33,3 @@
  -  NetflixGPT
    -  Search Bar
    -  Movie Suggestions   
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b47d8f2 (Build Netflix GPT homepage with authentication UI)

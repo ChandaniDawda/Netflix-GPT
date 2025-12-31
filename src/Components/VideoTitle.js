@@ -1,17 +1,20 @@
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="w-screen aspect-video pt-[20%] px-24 absolute text-white bg-gradient-to-r from-black">
-      <h1 className="text-6xl font-bold">{title}</h1>
-      <p className="py-6 text-lg w-1/4">{overview}</p>
-      <div className="my-4 md:m-0">
-        <button className="bg-white text-black p-4 px-12 text-xl  rounded-lg hover:bg-opacity-80">
-          ▶︎ Play
-        </button>
-        <button className="mx-2 bg-gray-500 text-white p-4 px-12 text-xl bg-opacity-50 rounded-lg">
-          ⓘ More Info
-        </button>
+    <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 to-transparent" />
+
+      <div className="relative z-10 h-full flex items-center">
+        <div className="pl-6 md:pl-24 lg:pl-32 max-w-2xl transform -translate-y-12">
+          <h1 className="text-white text-4xl md:text-7xl font-extrabold mb-4 leading-tight">{title}</h1>
+          <p className="text-sm md:text-lg text-gray-200 mb-6 max-w-xl">{overview}</p>
+          <div className="flex items-center space-x-4">
+            <button className="bg-white text-black px-6 py-3 rounded-md font-semibold">▶︎ Play</button>
+            <button className="bg-gray-700 bg-opacity-60 text-white px-6 py-3 rounded-md font-semibold">ⓘ More Info</button>
+          </div>
+        </div>
       </div>
-    </div>  
+    </div>
   );
 };
+
 export default VideoTitle;

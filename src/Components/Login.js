@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { USER_AVATAR } from '../utils/constants';
+import { BG_URL } from "../utils/constants";
 
 
 const Login = () => {
@@ -90,8 +91,8 @@ const Login = () => {
     <div>
 
       <Header/>
-      <div>
-        <img src = "https://assets.nflxext.com/ffe/siteui/vlv3/9ddb442a-aca7-4d85-9cd1-dbed62f18f26/web/IN-en-20251222-TRIFECTA-perspective_a882efaa-75c8-4143-9dc1-4f9932a791ac_medium.jpg"
+      <div className="absolute">
+        <img src = {BG_URL}
         alt = "backgroundImage"
         className='login-background-image'
         />

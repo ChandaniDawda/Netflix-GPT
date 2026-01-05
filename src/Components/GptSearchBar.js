@@ -4,10 +4,13 @@ import { useRef } from "react";
 import openai from "../utils/openai";
 import { API_OPTIONS } from "../utils/constants";
 import { addGptMovieResult } from "../utils/gptSlice";
+import { BG_URL } from "../utils/constants"; 
+
 
 const GptSearchBar = () => {
 
   const langKey = useSelector(store => store.config.lang);
+  const movieResults = useSelector(store => store.gpt.movieResults);
   const searchText = useRef(null);
   const dispatch = useDispatch();
 
@@ -18,7 +21,44 @@ const GptSearchBar = () => {
     return json.results;
   }
 
-  const handleGptSearchClick = async() => {
+
+     const handleGptSearchClick = async () => {
+  console.log(searchText.current.value);
+
+  const gptQuery =
+    "Act as a Movie Recommendation system and suggest some movies for the query : " +
+    searchText.current.value +
+    ". only give me names of 5 movies, comma seperated";
+
+  try {
+    const gptResults = await openai.chat.completions.create({
+  model: "gpt-3.5-turbo",  
+  messages: [{ role: "user", content: gptQuery }],
+});
+
+    const gptMovies =
+      gptResults.choices[0]?.message?.content.split(",");
+
+    const promiseArray = gptMovies.map((movie) =>
+      searchMovieTMDB(movie.trim())
+    );
+
+    const tmdbResultsRaw = await Promise.all(promiseArray);
+    const tmdbResults = tmdbResultsRaw.map(res => res?.[0] || null).filter(Boolean);
+
+    dispatch(
+      addGptMovieResult({
+        movieNames: gptMovies,
+        movieResults: tmdbResults,
+      })
+    );
+  } catch (err) {
+    console.error("GPT request failed:", err);
+    alert(lang[langKey]?.gptError || "Something went wrong");
+  }
+};
+
+     /*const handleGptSearchClick = async() => {
     // Implement the search functionality here
      console.log(searchText.current.value);
 
@@ -30,7 +70,7 @@ const GptSearchBar = () => {
     try {
       const gptResults = await openai.chat.completions.create({
         messages: [{ role: "user", content: gptQuery }],
-        model: "gpt-3.5-turbo",
+       // model: "gpt-3.5-turbo",
       });
 
       if (!gptResults?.choices || gptResults.choices.length === 0) {
@@ -54,10 +94,17 @@ const GptSearchBar = () => {
       alert(lang[langKey]?.gptError || "An error occurred while fetching suggestions.");
     }
 
-  };
+  }; */
 
 
   return (
+
+    <div className="relative w-full h-screen">
+    <img
+      src={BG_URL}
+      alt="background"
+      className="absolute w-full h-full object-cover -z-10"
+    /> 
 
     <div className=" pt-[10%] flex justify-center">
 
@@ -75,8 +122,12 @@ const GptSearchBar = () => {
               
               {lang[langKey].search}  </button>
         </form> 
+        
+    </div>
     </div>
   )
-}
+} 
+
+  
 
 export default GptSearchBar;

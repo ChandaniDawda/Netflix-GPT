@@ -11,20 +11,25 @@ const useNowPlayingMovies = () => {
       const nowPlayingMovies = useSelector((store) => store.movies.nowPlayingMovies);
 
       const getNowPlayingMovies = async () => {
+
+        if (nowPlayingMovies) return;
     
       const data = await fetch('https://api.themoviedb.org/3/movie/now_playing?page=1', API_OPTIONS  );
 
       const json = await data.json();
 
-     
-
       dispatch(addNowPlayingMovies(json.results));
     }
-     useEffect(() => { getNowPlayingMovies();
+     useEffect(() => {
 
-      !nowPlayingMovies && getNowPlayingMovies();
+    getNowPlayingMovies();
 
-      }, []);
-    };
+  },
+         [nowPlayingMovies] 
+        
+        ); 
+   
+   // ✅ dependency fixed
+};
 
-  export default useNowPlayingMovies;
+export default useNowPlayingMovies;

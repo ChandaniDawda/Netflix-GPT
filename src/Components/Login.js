@@ -45,12 +45,12 @@ const Login = () => {
           photoURL: USER_AVATAR,
         });
 
-        const { uid, email, displayName, photoURL } = auth.currentUser;
+        const { uid, email: userEmail, displayName, photoURL } = auth.currentUser;
 
         dispatch(
           addUser({
             uid,
-            email,
+            email: userEmail,
             displayName,
             photoURL,
           })

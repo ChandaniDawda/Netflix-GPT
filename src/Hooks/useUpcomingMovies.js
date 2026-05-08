@@ -9,20 +9,20 @@ const useUpcomingMovies = () => {
 
     const UpcomingMovies = useSelector((store) => store.movies.UpcomingMovies);
 
-  const getUpcomingMovies = async () => {
+    useEffect(() => {
+      const getUpcomingMovies = async () => {
 
-      const data = await fetch('https://api.themoviedb.org/3/movie/upcoming?page=1', API_OPTIONS  );
+          const data = await fetch('https://api.themoviedb.org/3/movie/upcoming?page=1', API_OPTIONS  );
 
-      const json = await data.json();
+          const json = await data.json();
 
-     
+         
 
-      dispatch(addUpcomingMovies(json.results));
-    }
-     useEffect(() => { getUpcomingMovies();
+          dispatch(addUpcomingMovies(json.results));
+        }
       !UpcomingMovies && getUpcomingMovies();
 
-      }, []);
+    }, [UpcomingMovies, dispatch]);
     };
 
   export default useUpcomingMovies;

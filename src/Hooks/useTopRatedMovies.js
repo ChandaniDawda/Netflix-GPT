@@ -9,19 +9,19 @@ const useTopRatedMovies = () => {
 
     const TopRatedMovies = useSelector((store) => store.movies.TopRatedMovies);
 
-  const getTopRatedMovies = async () => {
+    useEffect(() => {
+      const getTopRatedMovies = async () => {
 
-      const data = await fetch('https://api.themoviedb.org/3/movie/top_rated?page=1', API_OPTIONS  );
+          const data = await fetch('https://api.themoviedb.org/3/movie/top_rated?page=1', API_OPTIONS  );
 
-      const json = await data.json();
+          const json = await data.json();
 
 
-      dispatch(addTopRatedMovies(json.results));
-    }
-     useEffect(() => { getTopRatedMovies();
+          dispatch(addTopRatedMovies(json.results));
+        }
       !TopRatedMovies && getTopRatedMovies();
 
-      }, []);
+    }, [TopRatedMovies, dispatch]);
     };
 
   export default useTopRatedMovies;

@@ -10,7 +10,6 @@ import { BG_URL } from "../utils/constants";
 const GptSearchBar = () => {
 
   const langKey = useSelector(store => store.config.lang);
-  const movieResults = useSelector(store => store.gpt.movieResults);
   const searchText = useRef(null);
   const dispatch = useDispatch();
 
